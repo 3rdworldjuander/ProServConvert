@@ -1,0 +1,13 @@
+<html>
+<head>
+<title>{{ title }} - Converter</title>
+</head>
+<body>
+<h1>Convert CCW-R quote for easy uploading to Quosal</h1>
+<form method=post enctype=multipart/form-data>
+    {{ form.hidden_tag() }}
+    {{ form.file }}
+    <input type="submit">
+</form>
+</body>
+</html>
