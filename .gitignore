@@ -98,6 +98,9 @@ ENV/
 # mypy
 .mypy_cache/
 
-
 # Excel temporary
 *.xls*
+
+# PNG files  
+*.PNG*  
+
