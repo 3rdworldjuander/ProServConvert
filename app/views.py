@@ -191,4 +191,4 @@ def upload_file():
 	    create_quosal(filename)
 	    return send_from_directory(app.config['UPLOAD_FOLDER'], 'quosal_' + filename, as_attachment=True)
 	    return redirect(url_for('upload_file', filename=filename))
-    return render_template('index.html', title='CCW-R to Quosal', form=form)
+    return render_template('index.html', title='CCW-R Parser', form=form)
