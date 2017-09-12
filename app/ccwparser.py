@@ -15,7 +15,7 @@ class UploadForm(FlaskForm):
 	# example = RadioField('Label', coerce=int, choices=[('value','description'),('value_two','whatever')])
 	# SECRET_KEY = 'development'
 	
-UPLOAD_FOLDER = 'C:/Users/ogianan/Documents/Smartnet'
+UPLOAD_FOLDER = '/home/sysadmin/ccwparser'
 ALLOWED_EXTENSIONS = set(['txt', 'xlsx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -141,13 +141,13 @@ def create_quosal(file):
     inv = clean_inv(ccw_inv, l_mod, c_mod)
     quo = clean_quo(ccw_quo, l_mod, c_mod)
     
-    # Correcting the difference between Invoice Summary and Quote Details
-    diff = (inv['Quantity'] * inv['Unit_Price']).sum() - (quo['Quantity'] * quo['Unit_Price']).sum()
-    this = quo['Unit_Price'].iloc[0] + diff
-  
-    quo = quo.reset_index()
-    quo.set_value(0, 'Unit_Price', this)
-
+#    # Correcting the difference between Invoice Summary and Quote Details
+#    diff = (inv['Quantity'] * inv['Unit_Price']).sum() - (quo['Quantity'] * quo['Unit_Price']).sum()
+#    this = quo['Unit_Price'].iloc[0] + diff
+#  
+#    quo = quo.reset_index()
+#    quo.set_value(0, 'Unit_Price', this)
+#
     # Writing to Excel
     new_file = 'quosal_' + file
     writer = pd.ExcelWriter(new_file, engine='xlsxwriter')

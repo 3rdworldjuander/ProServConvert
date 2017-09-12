@@ -9,39 +9,39 @@
     {{ form.file }}
     <input type="submit">
 </form>
-<!-- <img src="/static/Excel_Invoice.PNG" alt="Invoice"> -->
-<h3 name="welcome">First time using {{title}}? Welcome!</h3>
-<h4 name="howto">How to use {{title}}</h3>
+<!-- <img src="/static/Excel_Invoice.PNG" alt="Invoice"> 
+<h3 name="welcome">First time using {{title}}? Welcome!</h3> -->
+<h3 name="howto">How to use {{title}}</h3>
 	<ol>
 		<li> Upload a CCW-R Excel file containing the quote to be extracted. </li>
-		<li> An Excel file with prefix "quosal_" will automatically be downloaded to your computer.
+		<li> An Excel file with prefix <b>"quosal_"</b> will be automatically downloaded to your computer.
 			<ul>
 				<li> The Excel file will have three tabs:  </li>
-				<img src="../static/excel_tabs.PNG" height="30">
+				<img src="../static/excel_tabs.PNG" height="50">
 					<ol>
-						<li>Invoice Line Item Detail - lists Service Ordering SKUs and quantities.	</li>
-						<li>Quote Line Item Detail - lists all the details of the Smartnet quote including Serial nos., Contract, Start, and End date.	</li>
-						<li>CCW-R # - lists the raw data from the original quote for reference.	</li>
+						<li><b>Invoice Line Item Detail</b> - lists Service Ordering SKUs and quantities.	</li>
+						<li><b>Quote Line Item Detail</b> - lists all the details of the Smartnet quote including Serial nos., Contract, Start, and End date.	</li>
+						<li><b>CCW-R #</b> - lists the raw data from the original quote for reference.	</li>
 					</ol>
 			</ul>
 		</li>
 	</ol>
 
-<h4 name="createquosal">Creating a Smartnet renewal quote in Quosal</h3>
+<h3 name="createquosal">Creating a Smartnet renewal quote in Quosal</h3>
 	<ol>
 		<li> Click "New Quote" and choose the "SMARTnet Renewals" quote template.
 			<ul>
 				<li> On Prepare Content tab, there will be two Products tabs: </li>
-				<img src="../static/quosal_tabs.PNG" height="100" >
+				<img src="../static/quosal_tabs.PNG" height="120" >
 					<ol>
-						<li>Invoice Line Item Detail - paste the contents of the Excel sheet with the same name here.	</li>
-						<li>Quote Line Item Detail - paste the contents of the Excel sheet with the same name here.	</li>
+						<li><b>Invoice Line Item Detail</b> - paste the contents of the Excel sheet with the same name here.	</li>
+						<li><b>Quote Line Item Detail</b> - paste the contents of the Excel sheet with the same name here.	</li>
 					</ol>
 			</ul>
-		<li>To properly display the columns in the quote, choose the appropriate mapping by clicking "Load Mapping" and choosing:	</li>
+		<li>To properly display the columns in the quote, choose the appropriate mapping by clicking <b>Load Mapping</b> and choosing:	</li>
 			<ul>
-				<li>Smartnet Invoice Line Mapping for the Invoice Line Item Detail tab.	</li>
-				<li>Smartnet Quote Line Mapping for the Quote Line Item Detail tab.	</li>
+				<li><b>Smartnet Invoice Line Mapping</b> for the Invoice Line Item Detail tab.	</li>
+				<li><b>Smartnet Quote Line Mapping</b> for the Quote Line Item Detail tab.	</li>
 			</ul>
 		<li>Publish and Deliver.	</li>
 	
