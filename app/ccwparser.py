@@ -11,15 +11,10 @@ from werkzeug.utils import secure_filename
 class UploadForm(FlaskForm):
     file = FileField()
 
-# class SimpleForm(Form):
-	# example = RadioField('Label', coerce=int, choices=[('value','description'),('value_two','whatever')])
-	# SECRET_KEY = 'development'
-	
+# Upload folder where xls files will be saved and retrieved by auto-downloader  	
 UPLOAD_FOLDER = '/home/sysadmin/ccwparser'
 ALLOWED_EXTENSIONS = set(['txt', 'xlsx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-
 
 
 ### Importing CCW-R quote for parsing to tables
@@ -31,7 +26,6 @@ def get_tables(file):
     table_names = ["Invoice Summary", "Invoice Details", "Quote Details"]
     
     # Parse dataframe to split tables
-  
     groups = df[0].isin(table_names).cumsum()
     tables = {g.iloc[0,0]:g.iloc[1:] for k,g in df.groupby(groups)}
     return tables
@@ -77,20 +71,6 @@ def clean_inv(df, l_mod, c_mod):
 ### Fix Quote Details formatting
 def clean_quo(df, l_mod, c_mod):
 
-#     ## Fix Extended_Net_Price column
-#     ##  
-#     ##  Only if xls file lists the column as string currency  
-#     ## 
-#     ## 
-    
-#     # Remove leading and trailing space in column
-
-#     df.Extended_Net_Price = list(map(str.strip, list(df.Extended_Net_Price)))
-
-#     # Replace '-' with ''
-#     df.Extended_Net_Price = df.Extended_Net_Price.str.replace('\$-', '0')
-#     df.Extended_Net_Price = df.Extended_Net_Price.replace('[\$,]', '', regex=True).astype(float)
-
     # Fix Quantity/Price issue
     df['Unit_Price'] = df.Extended_Net_Price/df.Quantity
 
@@ -113,25 +93,14 @@ def clean_quo(df, l_mod, c_mod):
 #### Function to check whether the quote is a Takeover or Incumbent quote and return correct l_mod and c_mod values.
 def check_takeover(df):
     if df['Takeover_Line'].iloc[0] == 'No':
-#Incumbent values l_mod = 15, c_mod = 23
+    #Incumbent values l_mod = 15, c_mod = 23
         l_mod = 15
         c_mod = 23
     else:
-#Takeover values l_mod = 10, c_mod = 15
+    #Takeover values l_mod = 10, c_mod = 15
         l_mod = 10
         c_mod = 15
     return l_mod, c_mod	
-
-#### FINAL QUOTE, THIS SHOULD HAVE PRICE CORRECTION WHICH WILL BE APPLIED ON THE QUOTE DETAILS DATAFRAME ####
-
-
-## Final Quote. read xls and copy to clipboard  
-
-# def inv_quosal(file, l_mod, c_mod): 
-#     import pyperclip
-#     ccw = get_tables(file)
-
-
 
 def create_quosal(file):
     ccw = get_tables(file)
@@ -141,13 +110,9 @@ def create_quosal(file):
     inv = clean_inv(ccw_inv, l_mod, c_mod)
     quo = clean_quo(ccw_quo, l_mod, c_mod)
     
-#    # Correcting the difference between Invoice Summary and Quote Details
-#    diff = (inv['Quantity'] * inv['Unit_Price']).sum() - (quo['Quantity'] * quo['Unit_Price']).sum()
-#    this = quo['Unit_Price'].iloc[0] + diff
-#  
-#    quo = quo.reset_index()
-#    quo.set_value(0, 'Unit_Price', this)
-#
+#   There will may be a discrepancy in the Invoice total amount and Quote total amount. This is because of the way parent items are priced in the quote line item details list.
+#   The invoice amount total is to be followed.  
+
     # Writing to Excel
     new_file = 'quosal_' + file
     writer = pd.ExcelWriter(new_file, engine='xlsxwriter')
@@ -157,36 +122,12 @@ def create_quosal(file):
     writer.save()
     return 
 
-
-# def allowed_file(filename):
-    # return '.' in filename and \
-           # filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index')
 def upload_file():
     form = UploadForm(csrf_enabled=False)
-    # if form.validate_on_submit():
-        # filename = secure_filename(form.file.data.filename)
-        # form.file.data.save(filename)
-        # return redirect(request.url)
-		
-    # if request.method == 'POST':
-        # # check if the post request has the file part
-        # if 'file' not in request.files:
-            # flash('No file part')
-            # return redirect(request.url)
-        # file = request.files['file']
-        # # if user does not select file, browser also
-        # # submit a empty part without filename
-        # if file.filename == '':
-            # flash('No selected file')
-            # return redirect(request.url)
-        # if file and allowed_file(file.filename):
     if form.validate_on_submit():
 	    filename = secure_filename(form.file.data.filename)
-		# file.save(filename)
 	    form.file.data.save(filename)
 	    create_quosal(filename)
 	    return send_from_directory(app.config['UPLOAD_FOLDER'], 'quosal_' + filename, as_attachment=True)
