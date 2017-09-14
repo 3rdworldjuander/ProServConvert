@@ -12,7 +12,7 @@ class UploadForm(FlaskForm):
     file = FileField()
 
 # Upload folder where xls files will be saved and retrieved by auto-downloader  	
-UPLOAD_FOLDER = '/home/sysadmin/ccwparser'
+UPLOAD_FOLDER = '/home/sysadmin/ccwparser/files/'
 ALLOWED_EXTENSIONS = set(['txt', 'xlsx'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -114,7 +114,9 @@ def create_quosal(file):
 #   The invoice amount total is to be followed.  
 
     # Writing to Excel
-    new_file = 'quosal_' + file
+#    new_file = 'quosal_' + file
+#   Trying to save to files folder
+    new_file = app.config['UPLOAD_FOLDER'] + 'quosal_' + file  
     writer = pd.ExcelWriter(new_file, engine='xlsxwriter')
     inv.to_excel(writer, sheet_name='Invoice Line Item Detail', columns = ['Service_Ordering_SKU', 'Quantity', 'Unit_Price', 'Client_Discount', 'Tekscape_Discount'], index=False)
     quo.to_excel(writer, sheet_name='Quote Line Item Detail', columns = ['PAK/Serial_Number', 'SKU', 'Product_Number', 'Quantity', 'Target_Contract_Number', 'Start_Date', 'End_Date', 'Unit_Price', 'Client_Discount', 'Tekscape_Discount'], index=False)
