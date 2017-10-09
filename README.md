@@ -1,4 +1,7 @@
-# ccwparser
+# Installing ccwparser  
+
+## Requirements  
+CentOS, python3, flask  
 
 ## Update system
 $ sudo yum update  
