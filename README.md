@@ -19,6 +19,7 @@ $ sudo pip3 install virtualenv
 ## Clone from github  
 $ git clone https://<copy link>  
 $ cd ccwparser  
+$ mkdir files  
 
 ## Activate virtualenv  
 $ virtualenv -p /usr/bin/python3 venv  
@@ -30,3 +31,5 @@ $ source venv/bin/activate
 
 ## Test run  
 (venv)$ python3 run.py  
+
+## Configure for automatically running on server boot  
