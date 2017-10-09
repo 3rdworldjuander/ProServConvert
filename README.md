@@ -16,3 +16,17 @@ $ sudo /usr/bin/python3.4 get-pip.py
 ## Install virtualenv  
 $ sudo pip3 install virtualenv  
 
+## Clone from github  
+$ git clone https://<copy link>  
+$ cd ccwparser  
+
+## Activate virtualenv  
+$ virtualenv -p /usr/bin/python3 venv  
+$ source venv/bin/activate  
+(venv)$ pip install flask  
+
+## Install requirements.txt  
+(venv)$ pip install -r requirements.txt  
+
+## Test run  
+(venv)$ python3 run.py  
