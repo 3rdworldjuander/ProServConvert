@@ -36,3 +36,4 @@ $ source venv/bin/activate
 (venv)$ python3 run.py  
 
 ## Configure for automatically running on server boot  
+Edit and add launch script to /etc/rc.d/rc.local  
