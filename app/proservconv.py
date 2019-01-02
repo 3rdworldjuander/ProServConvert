@@ -140,6 +140,6 @@ def upload_file():
 	    filename = secure_filename(form.file.data.filename)
 	    form.file.data.save(filename)
 	    create_proserv(filename)
-	    return send_from_directory(app.config['UPLOAD_FOLDER'], 'proserv_' + filename, as_attachment=True)
+	    return send_from_directory(app.config['UPLOAD_FOLDER'], 'proserv_converted.xlsx', as_attachment=True)
 	    return redirect(url_for('upload_file', filename=filename))
     return render_template('index.html', title='ProServ Conversion Tool', form=form)
