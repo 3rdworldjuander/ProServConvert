@@ -50,6 +50,7 @@ def create_proserv(file):
     out_table = pd.DataFrame(template, columns=['Product ID', 'Quantity', 'Unit Price', 'Unit Cost', 'Customer Description'])
     # Create a Pandas Excel writer using XlsxWriter as the engine.
     new_file = app.config['UPLOAD_FOLDER'] + 'proserv_' + file
+    print(new_file)  
     writer = pd.ExcelWriter(new_file, engine='xlsxwriter')
 
     # Load soitems file  
