@@ -49,7 +49,8 @@ def create_proserv(file):
     template = { 'Product ID' : ['PKG-PRO-PROFSVCS', 'PKG-PRO-PROFSVCS', 'PKG-PRO-PROFSVCS', 'PKG-PRO-PROFSVCS'] , 'Quantity' : [1, 1, 1, 1] , 'Price' : [0, 0, 0, 0] , 'Cost' : [0, 0, 0, 0] , 'Customer Description' : ['Professional Services: 50%', 'Professional Services: 20%', 'Professional Services: 20%', 'Professional Services: 10%'] }
     out_table = pd.DataFrame(template, columns=['Product ID', 'Quantity', 'Unit Price', 'Unit Cost', 'Customer Description'])
     # Create a Pandas Excel writer using XlsxWriter as the engine.
-    writer = pd.ExcelWriter('proserv_converted.xlsx', engine='xlsxwriter')
+    new_file = app.config['UPLOAD_FOLDER'] + 'proserv_' + file
+    writer = pd.ExcelWriter(new_file, engine='xlsxwriter')
 
     # Load soitems file  
     df, agg_df = load_skus(file, subitems, subcons)
