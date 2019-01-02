@@ -82,6 +82,8 @@ def create_proserv(file):
     # Zero out subcon pricing  
     #subcons_df = subcons_df.replace([subcons_df['Unit Price']], 0)
     # the above code quits when df has only one row  
+    # Disable warnings
+    pd.options.mode.chained_assignment = None
     subcons_df['Unit Price'] = 0
     # the above code outputs a warning  
     # rename PRO-SMARTHANDS* to SUBCON  
