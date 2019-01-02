@@ -20,7 +20,7 @@ class UploadForm(FlaskForm):
     file = FileField()
     
 # Upload folder where xls files will be saved and retrieved by auto-downloader  	
-UPLOAD_FOLDER = '/home/sysadmin/proserv/files/'
+UPLOAD_FOLDER = '/home/sysadmin/ProServConvert/files/'
 ALLOWED_EXTENSIONS = set(['txt', 'csv'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
