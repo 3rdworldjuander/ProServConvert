@@ -21,7 +21,7 @@ $ sudo pip3 install virtualenv
 
 ## Clone from github  
 $ git clone https://<copy link>  
-$ cd ccwparser  
+$ cd ProServConvert  
 $ mkdir files  
 
 ## Activate virtualenv  
